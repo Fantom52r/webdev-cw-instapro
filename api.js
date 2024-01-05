@@ -19,7 +19,7 @@ export function getPosts({ token }) {
       return response.json();
     })
     .then((data) => {
-      return data.posts; 
+      return data.posts;
     });
 }
 
@@ -67,4 +67,77 @@ export function uploadImage({ file }) {
   }).then((response) => {
     return response.json();
   });
+}
+
+export function addPost({ description, imageUrl, token }) {
+  return fetch(postsHost, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+    body: JSON.stringify({
+      description,
+      imageUrl,
+    }),
+  }).then((response) => {
+    if (response.status === 400) {
+      throw new Error("Введены некорректные данные");
+    }
+    return response.json();
+  });
+}
+
+export function addLike({ id, token }) {
+  return fetch(`${postsHost}/${id}/like`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+  })
+    .then((response) => {
+      if (response.status === 500) {
+        throw new Error("что то пошло не так");
+      }
+      return response.json();
+    })
+    .then((response) => {
+      return response.post;
+    });
+}
+
+export function deleteLike({ id, token }) {
+  return fetch(`${postsHost}/${id}/dislike`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+    },
+  })
+    .then((response) => {
+      if (response.status === 500) {
+        throw new Error("что то пошло не так");
+      }
+      return response.json();
+    })
+    .then((response) => {
+      return response.post;
+    });
+}
+
+export function getUserPosts({ id, token }) {
+  return fetch(`${postsHost}/user-posts/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: token,
+    },
+  })
+    .then((response) => {
+      if (response.status === 401) {
+        throw new Error("Нет авторизации");
+      }
+
+      return response.json();
+    })
+    .then((data) => {
+      return data.posts;
+    });
 }
