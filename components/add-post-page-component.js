@@ -8,13 +8,15 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     const appHtml = `
     <div class="page-container">
       <div class="header-container"></div>
-      <h3>Добавить пост</h3>
+      <div class="form">
+      <h3 class="form-title">Добавить пост</h3>
       <div class="upload-image-container"></div>
       <label>
       <p>Опишите фотографию</p>
-      <textarea class="descriptionPost"></textarea>
+      <textarea class="descriptionPost input"></textarea>
       </label>
       <button class="button" id="add-button">Добавить</button>
+      </div>
     </div>
   `;
 
@@ -34,6 +36,14 @@ export function renderAddPostPageComponent({ appEl, onAddPostClick }) {
     const descriptionElement = document.querySelector(".descriptionPost")
     
     document.getElementById("add-button").addEventListener("click", () => {
+      if (!imageUrl) {
+        alert("вы не загрузили изображение")
+        return
+      } 
+      if (!descriptionElement.value) {
+        alert("Вы не загрузили Описание")
+        return
+      }
       onAddPostClick({
         description: descriptionElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;"),
         imageUrl,

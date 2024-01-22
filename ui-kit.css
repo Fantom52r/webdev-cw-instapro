@@ -160,3 +160,9 @@ strong {
     height: 32px;
   }
 }
+.descriptionPost {
+  padding: 15px;
+    resize: none;
+    width: 100%;
+    height: 100px;
+}

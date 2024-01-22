@@ -121,10 +121,12 @@ const renderApp = () => {
     return renderAddPostPageComponent({
       appEl,
       onAddPostClick({ description, imageUrl }) {
-        addPost({description,imageUrl, token: getToken()})
+        addPost({description,imageUrl, token: getToken()}).then(() =>{
+          goToPage(POSTS_PAGE);
+        })
         // TODO: реализовать добавление поста в API
         console.log("Добавляю пост...", { description, imageUrl });
-        goToPage(POSTS_PAGE);
+        // goToPage(POSTS_PAGE);
       },
     });
   }

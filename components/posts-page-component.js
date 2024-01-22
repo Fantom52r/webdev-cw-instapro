@@ -2,7 +2,8 @@ import { POSTS_PAGE, USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, getToken } from "../index.js";
 import { addLike, deleteLike } from "../api.js";
-
+import { formatDistanceToNow } from 'date-fns'
+import {ru} from "date-fns/locale"
 export function renderPostsPageComponent({ appEl }) {
   // TODO: реализовать рендер постов из api
   console.log("Актуальный список постов:", posts);
@@ -33,7 +34,7 @@ export function renderPostsPageComponent({ appEl }) {
    ${post.description}
  </p>
  <p class="post-date">
-  ${date.toLocaleString()}
+  ${formatDistanceToNow(date, { addSuffix: true, locale: ru })}
  </p>
  </li>`;
     })
