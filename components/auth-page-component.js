@@ -93,7 +93,7 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         }
 
         loginUser({
-          login: login,
+          login: login.replaceAll("<", "&lt;").replaceAll(">", "&gt;"),
           password: password,
         })
           .then((user) => {
@@ -127,9 +127,9 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         }
 
         registerUser({
-          login: login,
+          login: login.replaceAll("<", "&lt;").replaceAll(">", "&gt;"),
           password: password,
-          name: name,
+          name: name.replaceAll("<", "&lt;").replaceAll(">", "&gt;"),
           imageUrl,
         })
           .then((user) => {

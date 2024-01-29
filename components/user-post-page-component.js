@@ -1,4 +1,4 @@
-import { goToPage, posts } from "../index.js";
+import { goToPage, posts, user } from "../index.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { initLikeListenners } from "./posts-page-component.js";
 
@@ -57,7 +57,7 @@ export function renderUserPostsPageComponent({ appEl }) {
       element: document.querySelector(".header-container"),
     });
   
-    initLikeListenners()
-  
+   
+      initLikeListenners()
   
   }

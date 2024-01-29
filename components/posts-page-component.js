@@ -1,6 +1,6 @@
 import { POSTS_PAGE, USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { posts, goToPage, getToken } from "../index.js";
+import { posts, goToPage, getToken, user } from "../index.js";
 import { addLike, deleteLike } from "../api.js";
 import { formatDistanceToNow } from 'date-fns'
 import {ru} from "date-fns/locale"
@@ -58,7 +58,9 @@ export function renderPostsPageComponent({ appEl }) {
     element: document.querySelector(".header-container"),
   });
 
-  initLikeListenners()
+ 
+    initLikeListenners()
+  
 
 
 
@@ -77,6 +79,10 @@ export function initLikeListenners() {
 
 for ( let buttonElement of buttonElements){
   buttonElement.addEventListener("click", () => {
+    if (!user) {
+      alert("Нужно Авторизоваться")
+    return
+    }
     let id = buttonElement.dataset.postId
     let isLiked = buttonElement.dataset.isLiked
     if (isLiked === "true") {
@@ -122,5 +128,7 @@ function renderPost(data, buttonElement) {
          ${date.toLocaleString()}
         </p>
         </li>`
-        initLikeListenners()
+        console.log(user);
+          initLikeListenners()
+
 } 
